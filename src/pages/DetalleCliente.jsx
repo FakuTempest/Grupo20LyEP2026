@@ -19,6 +19,10 @@ const DetalleCliente = () => {
   }, [id]);
 
   const eliminarCliente = async () => {
+    if (role?.trim() !== "Gerencia") {
+      setMensaje("No tenes permisos para eliminar clientes");
+      return;
+    }
     try {
       const respuesta = await fetch(
         `https://fakestoreapi.com/users/${id}`,
