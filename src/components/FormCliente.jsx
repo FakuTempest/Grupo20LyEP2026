@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Form, Button, Alert, Spinner } from "react-bootstrap";
 import clientesService from "../services/clientesService";
 
-const FormCliente = () => {
+const FormCliente = ({ onNuevoCliente }) => {
 
     const [nombre, setNombre] = useState("");
     const [email, setEmail] = useState("");
