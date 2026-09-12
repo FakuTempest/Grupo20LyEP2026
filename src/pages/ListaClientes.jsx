@@ -26,15 +26,15 @@ const ListaClientes = () => {
         setLoading(false);
       });
   }, []);
-
+  const terminoBusqueda = busqueda.toLowerCase();
   const clientesFiltrados = clientes.filter(
     (cliente) =>
       (cliente.name?.lastname ?? "")
         .toLowerCase()
-        .includes(busqueda.toLowerCase()) ||
+        .includes(terminoBusqueda) ||
       (cliente.address?.city ?? "")
         .toLowerCase()
-        .includes(busqueda.toLowerCase())
+        .includes(terminoBusqueda)
   );
 
   if (loading) {
