@@ -65,6 +65,7 @@ const FormCliente = ({ onNuevoCliente }) => {
             setMensaje(
                 `Cliente creado correctamente. ID: ${respuesta.id}`
             );
+            onNuevoCliente?.(respuesta);
 
             setNombre("");
             setEmail("");
