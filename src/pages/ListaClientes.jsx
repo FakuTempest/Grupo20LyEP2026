@@ -26,16 +26,13 @@ const ListaClientes = () => {
         setLoading(false);
       });
   }, []);
-  const terminoBusqueda = busqueda.toLowerCase();
+  const normalizarTexto = (valor) => (valor ?? "").toLowerCase();
+  const terminoBusqueda = normalizarTexto(busqueda);
   const clientesFiltrados = clientes.filter(
-    (cliente) =>
-      (cliente.name?.lastname ?? "")
-        .toLowerCase()
-        .includes(terminoBusqueda) ||
-      (cliente.address?.city ?? "")
-        .toLowerCase()
-        .includes(terminoBusqueda)
-  );
+  (cliente) =>
+    normalizarTexto(cliente.name?.lastname).includes(terminoBusqueda) ||
+    normalizarTexto(cliente.address?.city).includes(terminoBusqueda)
+);
 
   if (loading) {
     return <h2>Cargando clientes...</h2>;
