@@ -29,10 +29,10 @@ const ListaClientes = () => {
 
   const clientesFiltrados = clientes.filter(
     (cliente) =>
-      cliente.name.lastname
+      (cliente.name?.lastname ?? "")
         .toLowerCase()
         .includes(busqueda.toLowerCase()) ||
-      cliente.address.city
+      (cliente.address?.city ?? "")
         .toLowerCase()
         .includes(busqueda.toLowerCase())
   );
