@@ -93,14 +93,14 @@ const ListaClientes = () => {
               <td>{cliente.id}</td>
 
               <td>
-                {cliente.name.firstname} {cliente.name.lastname}
+                {cliente.name?.firstname ?? ""} {cliente.name?.lastname ?? ""}
               </td>
 
               <td>{cliente.email}</td>
 
               <td>{cliente.phone}</td>
 
-              <td>{cliente.address.city}</td>
+              <td>{cliente.address?.city ?? ""}</td>
 
               <td>
                 <Link
