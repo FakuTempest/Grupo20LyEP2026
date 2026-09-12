@@ -7,7 +7,7 @@ const DetalleCliente = () => {
  const { id } = useParams();
   const navigate = useNavigate();
   const { admin } = useAutorizaciones();
-  const role = localStorage.getItem("role");
+  const role = admin?.sector;
 
   const [cliente, setCliente] = useState(null);
   const [mensaje, setMensaje] = useState("");
