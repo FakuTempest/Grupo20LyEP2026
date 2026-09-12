@@ -28,11 +28,13 @@ const ListaClientes = () => {
   }, []);
   const normalizarTexto = (valor) => (valor ?? "").toLowerCase();
   const terminoBusqueda = normalizarTexto(busqueda);
-  const clientesFiltrados = clientes.filter(
-  (cliente) =>
-    normalizarTexto(cliente.name?.lastname).includes(terminoBusqueda) ||
-    normalizarTexto(cliente.address?.city).includes(terminoBusqueda)
-);
+  const clientesFiltrados = terminoBusqueda
+  ? clientes.filter(
+      (cliente) =>
+        normalizarTexto(cliente.name?.lastname).includes(terminoBusqueda) ||
+        normalizarTexto(cliente.address?.city).includes(terminoBusqueda)
+    )
+  : clientes;
 
   if (loading) {
     return <h2>Cargando clientes...</h2>;
