@@ -9,6 +9,10 @@ const ListaClientes = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  const agregarCliente = (clienteNuevo) => {
+     setClientes((prev) => [...prev, clienteNuevo]);
+  };
+
   useEffect(() => {
     fetch("https://fakestoreapi.com/users")
       .then((res) => {
