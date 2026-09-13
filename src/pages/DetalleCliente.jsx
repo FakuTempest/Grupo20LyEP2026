@@ -28,7 +28,7 @@ const DetalleCliente = () => {
 
         const respuesta = await fetch(`https://fakestoreapi.com/users/${id}`);
         if (!respuesta.ok) {
-          throw new Error("No se pudo obtener el cliente");
+          throw new Error(`No se pudo obtener el cliente. Codigo: ${respuesta.status}`);
         }
         const data = await respuesta.json();
         if(!data){
@@ -37,7 +37,7 @@ const DetalleCliente = () => {
 
         setCliente(data);
       }catch (error) {
-        setError("No se pudo cargar la informacion del cliente");
+        setError(error.message);
       }finally{
         setLoading(false);
       }
