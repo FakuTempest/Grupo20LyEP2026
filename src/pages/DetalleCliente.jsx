@@ -1,11 +1,13 @@
 import '../css/detallecliente.css'
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
- 
+import useAutorizaciones from "../hooks/useAutorizaciones";
+
 const DetalleCliente = () => {
  const { id } = useParams();
   const navigate = useNavigate();
-  const role = localStorage.getItem("role");
+  const { admin } = useAutorizaciones();
+  const role = admin?.sector;
 
   const [cliente, setCliente] = useState(null);
   const [mensaje, setMensaje] = useState("");
@@ -17,6 +19,10 @@ const DetalleCliente = () => {
   }, [id]);
 
   const eliminarCliente = async () => {
+    if (role?.trim() !== "Gerencia") {
+      setMensaje("No tenes permisos para eliminar clientes");
+      return;
+    }
     try {
       const respuesta = await fetch(
         `https://fakestoreapi.com/users/${id}`,

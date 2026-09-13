@@ -22,8 +22,11 @@ useEffect(()=>{
   }
 
 },[admin])
+// El rol vive solo en el Context (admin.sector), no en localStorage:
+// ver hallazgos #2 y #3 del analisis tecnico.
 const cerrarSesion=()=>{
   setAdmin(null)
+  localStorage.removeItem('role')
 }
 return (
     <AutorizacionesContext.Provider
