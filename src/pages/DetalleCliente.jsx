@@ -72,7 +72,12 @@ const DetalleCliente = () => {
   }
 
   if (error) {
-    return <h2>{error}</h2>;
+    return (
+      <div>
+        <h2>{error}</h2>
+        <button onClick={()=> window.location.reload()}>Reintentar</button>
+      </div>
+    )
   }
 
 
