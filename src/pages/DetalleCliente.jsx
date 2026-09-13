@@ -72,13 +72,28 @@ const DetalleCliente = () => {
   }
 
   if (error) {
-    return (
-      <div>
-        <h2>{error}</h2>
-        <button onClick={()=> window.location.reload()}>Reintentar</button>
+  return (
+    <div className="detalle-cliente error-cliente">
+      <h2>{error}</h2>
+
+      <div className="acciones-error">
+        <button
+          className="btn-reintentar"
+          onClick={() => window.location.reload()}
+        >
+          Reintentar
+        </button>
+
+        <button
+          className="btn-volver"
+          onClick={() => navigate("/clientes")}
+        >
+          Volver a clientes
+        </button>
       </div>
-    )
-  }
+    </div>
+  );
+}
 
 
   return (

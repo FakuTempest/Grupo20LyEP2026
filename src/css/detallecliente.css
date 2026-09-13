@@ -56,3 +56,50 @@
     font-weight:bold;
     margin-bottom:25px;
 }
+
+.error-cliente{
+    text-align:center;
+}
+
+.error-cliente h2{
+    border-bottom:none;
+    margin-top:0;
+}
+
+.acciones-error{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    margin-top:25px;
+}
+
+.btn-reintentar,
+.btn-volver{
+    border:none;
+    border-radius:10px;
+    padding:10px 20px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-reintentar{
+    background:#d63384;
+    color:white;
+}
+
+.btn-reintentar:hover{
+    background:#c2185b;
+    transform:scale(1.02);
+}
+
+.btn-volver{
+    background:white;
+    color:#d63384;
+    border:2px solid #d63384;
+}
+
+.btn-volver:hover{
+    background:#ffd6e7;
+    transform:scale(1.02);
+}
