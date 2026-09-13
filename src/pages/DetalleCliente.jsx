@@ -11,11 +11,40 @@ const DetalleCliente = () => {
 
   const [cliente, setCliente] = useState(null);
   const [mensaje, setMensaje] = useState("");
+  
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/users/${id}`)
-      .then((res) => res.json())
-      .then((data) => setCliente(data));
+    const cargarCliente = async () => {
+      try{
+        setLoading(true);
+        setError(null);
+
+        if (!id){
+          setError("No se especifico un cliente.");
+          setLoading(false);
+          return;
+        }
+
+        const respuesta = await fetch(`https://fakestoreapi.com/users/${id}`);
+        if (!respuesta.ok) {
+          throw new Error(`No se pudo obtener el cliente. Codigo: ${respuesta.status}`);
+        }
+        const data = await respuesta.json();
+        if(!data){
+          throw new Error("No se encontro el cliente");
+        }
+
+        setCliente(data);
+      }catch (error) {
+        setError(error.message);
+      }finally{
+        setLoading(false);
+      }
+    };
+    cargarCliente();
   }, [id]);
 
   const eliminarCliente = async () => {
@@ -42,9 +71,36 @@ const DetalleCliente = () => {
       setMensaje("Error al eliminar cliente");
     }
   };
-  if (!cliente) {
+
+  
+  if (loading) {
     return <h2>Cargando cliente...</h2>;
   }
+
+  if (error) {
+  return (
+    <div className="detalle-cliente error-cliente">
+      <h2>{error}</h2>
+
+      <div className="acciones-error">
+        <button
+          className="btn-reintentar"
+          onClick={() => window.location.reload()}
+        >
+          Reintentar
+        </button>
+
+        <button
+          className="btn-volver"
+          onClick={() => navigate("/clientes")}
+        >
+          Volver a clientes
+        </button>
+      </div>
+    </div>
+  );
+}
+
 
   return (
     <div className="detalle-cliente">
