@@ -30,16 +30,15 @@ const ListaClientes = () => {
         setLoading(false);
       });
   }, []);
-
-  const clientesFiltrados = clientes.filter(
-    (cliente) =>
-      cliente.name.lastname
-        .toLowerCase()
-        .includes(busqueda.toLowerCase()) ||
-      cliente.address.city
-        .toLowerCase()
-        .includes(busqueda.toLowerCase())
-  );
+  const normalizarTexto = (valor) => (valor ?? "").toLowerCase();
+  const terminoBusqueda = normalizarTexto(busqueda);
+  const clientesFiltrados = terminoBusqueda
+  ? clientes.filter(
+      (cliente) =>
+        normalizarTexto(cliente.name?.lastname).includes(terminoBusqueda) ||
+        normalizarTexto(cliente.address?.city).includes(terminoBusqueda)
+    )
+  : clientes;
 
   if (loading) {
     return <h2>Cargando clientes...</h2>;
@@ -97,14 +96,14 @@ const ListaClientes = () => {
               <td>{cliente.id}</td>
 
               <td>
-                {cliente.name.firstname} {cliente.name.lastname}
+                {cliente.name?.firstname ?? ""} {cliente.name?.lastname ?? ""}
               </td>
 
               <td>{cliente.email}</td>
 
               <td>{cliente.phone}</td>
 
-              <td>{cliente.address.city}</td>
+              <td>{cliente.address?.city ?? ""}</td>
 
               <td>
                 <Link
