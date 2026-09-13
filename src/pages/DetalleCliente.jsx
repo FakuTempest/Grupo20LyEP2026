@@ -20,13 +20,19 @@ const DetalleCliente = () => {
         setLoading(true);
         setError(null);
 
+        if (!id){
+          setError("No se especifico un cliente.");
+          setLoading(false);
+          return;
+        }
+
         const respuesta = await fetch(`https://fakestoreapi.com/users/${id}`);
         if (!respuesta.ok) {
           throw new Error("No se pudo obtener el cliente");
         }
         const data = await respuesta.json();
         if(!data){
-          throw new Error("No se encontre el cliente");
+          throw new Error("No se encontro el cliente");
         }
 
         setCliente(data);
