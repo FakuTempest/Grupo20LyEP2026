@@ -53,7 +53,7 @@ const ListaClientes = () => {
     <div className="clientes-container">
 
       <h1>Clientes</h1>
-      <FormCliente />
+      <FormCliente onNuevoCliente={agregarCliente} />
 
       <hr />
 
